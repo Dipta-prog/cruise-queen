@@ -34,12 +34,29 @@ function buyNow() {
    var txt;
    const firstClassCount = getInputValue('firstClass');
    const economyClassCount = getInputValue('economyClass');
-   const cost = document.getElementById("total").innerText
+   const cost = document.getElementById("total").innerText;
    const confirmText = "Dear customer,\n" + "                         " + "You have selected " + firstClassCount + " First Class Tickets &\n" + "                                                       " + economyClassCount + " Economy Class Tickets which costs" + "\n                                                                                " + "you $ " + cost + "\n\n Want to continue?";
-   if (confirm(confirmText)) {
-      txt = "You bought tickets successfully!";
-   } else {
-      txt = "You pressed Cancel!";
+   const emptyText = "You can't buy 0 ticket from us";
+
+   // Number of tickets is greater than 0
+   if (cost > 0) {
+      if (confirm(confirmText)) {
+         txt = "You bought tickets successfully!";
+      }
+
+      else {
+         txt = "You pressed Cancel!";
+      }
+   }
+
+   // Number of ticket is 0
+   else if (cost == 0) {
+      if (confirm(emptyText)) {
+         txt = "Please select number of ticket you want to buy";
+      }
+      else {
+         txt = "Sorry! we can't process your order";
+      }
    }
    document.getElementById("finalMessage").innerHTML = txt;
 }
